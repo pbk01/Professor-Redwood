@@ -1,3 +1,4 @@
 node_modules
-config/secrets.json
+config/.env
 .idea
+.env

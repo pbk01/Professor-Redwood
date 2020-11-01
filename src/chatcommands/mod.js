@@ -8,8 +8,8 @@ const handleMod = (data, message) => {
 	//improper pokemon tagging
 	if (message.content.indexOf('<@&') > -1) {
 		if (message.member) {
-			if (message.member.roles) {
-				message.member.roles.forEach( (role) => {
+			if (message.member.roles.cache) {
+				message.member.roles.cache.forEach( (role) => {
 					if (CONSTANTS.PRIVILEGED_ROLES.indexOf(role.name) > -1)	{
 						privileged = true;
 					}
@@ -22,13 +22,12 @@ const handleMod = (data, message) => {
 				roleid = roleid.substring(0, roleid.indexOf(' ')-1);
 			else
 				roleid = roleid.substring(0, roleid.length-1);
-			data.GUILD.roles.forEach((role) => {
+			data.GUILD.roles.cache.forEach((role) => {
 				if (role.id == roleid) {
 					let wantedMon = role.name;
-					if (CONSTANTS.MONS.indexOf(wantedMon) > -1 || CONSTANTS.RAIDMONS.indexOf(wantedMon) > -1 || CONSTANTS.LEGENDARYMONS.indexOf(wantedMon) > -1 || 
+					if (CONSTANTS.MONS.indexOf(wantedMon) > -1 || CONSTANTS.LEGENDARYMONS.indexOf(wantedMon) > -1 || 
 					CONSTANTS.EGGTIERS.indexOf(wantedMon) > -1) {
-						reply = '**HEY** :rage: \nDo **NOT** use the @ tag when reporting Pokemon or Raids; that\'s my job! Please use the appropriate **!raid**, **!egg**, or **!wild** commands instead.\nFor usage and rules, please read Rule#5 in ' 
-							+ data.channelsByName['start_here'] + '. You have been warned!';
+						reply = `**HEY** :rage: \nDo **NOT** use the @ tag when reporting. That's my job! Please use the appropriate commands (see ${data.channelsByName['bot_commands']}) instead.\nFor usage and rules, please read Rule#5 in ${data.channelsByName['adventure_rules']}. You have been warned!`;
 						message.channel.send(reply);
 					}
 				} 
@@ -41,3 +40,4 @@ const handleMod = (data, message) => {
 module.exports = (data) => ( (message) => {
 	return handleMod(data, message);
 });
+

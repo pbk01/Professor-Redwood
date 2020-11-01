@@ -3,7 +3,7 @@
 const Discord = require('discord.js');
 
 const regionsConfig = require('../config/regions.json');
-const secrets = require('../config/secrets.json');
+const secrets = require('../config/secrets.js');
 const logger = require('../logger');
 
 String.prototype.capitalize = function () {
@@ -33,16 +33,17 @@ const tagOrComment = new RegExp(
 
 const data = {
 	BOTNAME: 'Professor Redwood',
-	BOTID: secrets.discord.BOTID,
+	BOTID: process.env.DISCORD_CLIENTID,
 	TEAMS: ['valor', 'instinct', 'mystic'],
-	MONS: ['aerodactyl', 'chansey', 'ditto', 'dratini', 'farfetch\'d', 'dragonite', 'girafarig', 'grimer', 'hitmonchan', 'hitmonlee', 'hitmontop',
-		'machop', 'makuhita', 'mareep', 'miltank', 'onix', 'porygon', 'ralts', 'scyther', 'slakoth', 'tauros', 'togetic', 'larvitar', 'unown', 'zangoose', 'feebas',
-		'wailmer', 'seviper', 'lotad', 'aron', 'trapinch', 'bagon', 'beldum', 'lileep', 'chimecho', 'anorith'],
-	EGGTIERS: ['tier3', 'tier4', 'tier5'],
-	RAIDMONS: ['absol', 'aggron', 'alakazam', 'blastoise', 'charizard', 'gengar', 'lapras', 'machamp', 'mawile', 'rhydon', 'snorlax', 'tyranitar', 'venusaur', 'wailmer'],
-	LEGENDARYMONS: ['legendary', 'articuno', 'moltres', 'zapdos', 'mew', 'mewtwo', 'lugia', 'ho-oh', 'celebi', 'entei', 'raikou', 'suicune', 'groudon', 'regirock', 'registeel', 'kyogre', 'rayquaza', 'latios', 'latias', 'jirachi', 'deoxys', 'regice'],
-	SPECIALMONS: ['highiv', 'finalevo'],
+	MONS: ['absol', 'aerodactyl', 'alomomola', 'archen', 'audino', 'axew', 'bagon', 'basculin', 'beedrill', 'beldum', 'blastoise', 'blissey', 'chansey', 'charizard', 'chimecho', 'cranidos', 'darumaka', 'deino', 'ditto', 'dragonite', 'dratini', 'drilbur', 'emolga', 'excadrill', 'feebas', 'ferroseed', 'gabite', 'gengar', 'gible', 'gyarados', 'heatmor', 'hitmonchan', 'hitmontop', 'houndoom', 'klink', 'lampent', 'lapras', 'larvitar', 'litwick', 'lunatone', 'machamp', 'machop', 'marowak', 'mawile', 'nincada', 'onix', 'panpour', 'pidgeot', 'porygon', 'raichu',  'ralts', 'scyther', 'seviper', 'shieldon', 'shinx', 'snorlax', 'spinda', 'spiritomb', 'tauros', 'throh', 'timburr', 'tirtouga', 'togetic', 'tyranitar', 'unown', 'venusaur', 'zweilous'],
+	EGGTIERS: ['tier1', 'tier3', 'tier5', 'mega'],
+	LEGENDARYMONS: ['legendary', 'articuno', 'azelf', 'cobalion', 'cresselia', 'darkrai', 'deoxys', 'dialga', 'entei', 'genesect', 'giratina', 'groudon', 'heatran', 'ho-oh', 'kyogre', 'kyurem', 'landorus', 'latias', 'latios', 'lugia', 'mewtwo', 'moltres', 'palkia', 'raikou', 'rayquaza', 'regice', 'regigigas', 'regirock', 'registeel', 'reshiram', 'suicune', 'terrakion', 'thundurus', 'tornadus', 'virizion', 'zapdos', 'zekrom'],
+	SPECIALMONS: ['shadow', 'highiv', 'finalevo', 'shinycheck'],
+	TREXECUTIVES: ['giovanni', 'arlo', 'cliff', 'sierra'],
 	SPECIALRAIDS: ['exgym'],
+	QUESTREWARDS: ['stardust', 'technical_machine', 'rarecandy', 'silver_pinap', 'sinnoh_stone','unova_stone'],
+	LURES:  ['glacial_lure', 'magnetic_lure', 'mossy_lure'],
+	PVP:  ['pvp'],
 	REGIONS: regionsConfig.regions,
 	COMMON_MISSPELLINGS: {
 		'hooh': 'ho-oh',
@@ -52,7 +53,27 @@ const data = {
 		'raiku': 'raikou',
 		'chancey': 'chansey',
 		'tyrannitar': 'tyranitar',
-		'slakoff': 'slakoth'
+		'slakoff': 'slakoth',
+		'cresellia': 'cresselia',
+		'creselia': 'cresselia',
+		'hippopotamus': 'hippopotas',
+		'hippo': 'hippopotas',
+		'whismer': 'whismur',
+		'taurus': 'tauros',
+		'drillbur': 'drilbur',
+		'excadril': 'excadrill',
+		'feroseed': 'ferroseed',
+		'gollett': 'golett',
+		'nidoranf': 'nidoran_female',
+		'nidoranm': 'nidoran_male',
+		'verizion': 'virizion',
+		'verizon': 'virizion',
+		'timbur': 'timburr',
+		'timber': 'timburr',
+		'gyrados': 'gyarados',
+		'venasaur': 'venusaur',
+		'hounddoom': 'houndoom',
+		'spirittomb': 'spiritomb',
 	},
 	NSFW_WORDS: [' fuck ', ' fucking ', ' fuckin ', ' shit ', ' shitty '],
 	PROTECTED_CHANNELS: ['start_here', 'professor_redwood', 'announcements'], // todo : move to a config file
